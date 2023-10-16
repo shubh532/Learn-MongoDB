@@ -1,5 +1,6 @@
 const path = require('path');
-const mongoConnect = require("./util/database").mongoConnect
+const mongoose = require("mongoose")
+// const mongoConnect = require("./util/database").mongoConnect
 const User = require("./models/user")
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -33,8 +34,12 @@ app.use(shopRoutes);
 
 app.use(errorController.get404);
 
-mongoConnect(() => {
+mongoose.connect('mongodb+srv://shubhammahulkar2000:2BU10ziQ7SKKR0nC@cluster0.qrqxscz.mongodb.net/?retryWrites=true&w=majority')
+.then(result=>{
   app.listen(3000)
+})
+.catch(err=>{
+  console.log(err)
 })
 
 
